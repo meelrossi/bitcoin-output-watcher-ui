@@ -7,7 +7,7 @@ angular.module('app-bootstrap').service('httpService',
     methods.forEach((method) => {
       this[method] = function (url = '') {
         return $http[method].call(this, `${configuration.apiUrl}${urlPrefix}${url}`, ..._.tail(arguments));
-      }
+      };
     });
 
     this.for = (prefix) => new this.constructor($http, configuration, `${urlPrefix}${prefix}/`);
