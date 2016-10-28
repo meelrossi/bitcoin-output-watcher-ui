@@ -1,20 +1,80 @@
-body {
-  background-image: url('../assets/wolox_bg.png');
-}
+* {
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
 
-.center {
-  background-color: $translucent-white;
-  height: 100%;
-  left: 20%;
-  position: absolute;
-  text-align: center;
-  width: 60%;
-
-  h1 {
-    color: $wolox-green;
+  &:focus {
+    outline: none;
   }
 }
 
-.class-to-be-purified {
-  color: $translucent-white;
+input {
+  border: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 35px;
+
+  &.search {
+    background-image: url('../assets/search.png');
+    background-position: 6px 7px;
+    background-repeat: no-repeat;
+    margin: 20px 0;
+    padding: 12px 12px 12px 35px;
+    width: 260px;
+  }
 }
+
+.container {
+  background-color: $white;
+  float: left;
+  height: 100vh;
+  width: calc(100% - 300px);
+}
+
+.navbar {
+  background-color: $light-red;
+  float: left;
+  height: 100vh;
+  text-align: center;
+  width: 300px;
+}
+
+.logo-navbar {
+  margin-top: 30px;
+}
+
+.filters-box {
+  margin: 20px;
+  text-align: left;
+}
+
+a {
+
+  &.search-option {
+    display: block;
+    padding: 15px 0;
+  }
+}
+
+.search-title {
+  margin-bottom: 10px;
+}
+
+hr {
+  border-color: $white;
+  border-style: solid;
+  margin-bottom: 10px;
+}
+
+.register-btn {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  margin: 20px;
+  position: absolute;
+}
+
+.subscribe {
+  margin-left: 10px;
+}
+
+

@@ -4,36 +4,36 @@ angular.module('app-bootstrap').config([
 
     // For any unmatched urls
     $urlRouterProvider.otherwise(($injector) => {
-      $injector.get('$state').go('centered.state1');
+      $injector.get('$state').go('index.state1');
     });
 
     // Now set up the states
     $stateProvider
-      .state('centered', {
+      .state('index', {
         abstract: true,
         views: {
           main: {
-            templateUrl: '../app/components/centered/centered.html'
+            templateUrl: '../app/components/index.html'
           }
         }
       })
-      .state('centered.state1', {
-        url: '/state1',
+      .state('index.state1', {
+        url: '/transactions',
         views: {
           content: {
-            templateUrl: '../app/components/centered/component1/component1.html',
+            templateUrl: '../app/components/component1/component1.html',
             controller: 'Component1Controller',
             controllerAs: 'comp1Ctrl'
           }
         }
       })
-      .state('centered.state2', {
-        url: '/state2',
+      .state('index.subscribe', {
+        url: '/subscribe',
         views: {
           content: {
-            templateUrl: '../app/components/centered/component2/component2.html',
-            controller: 'Component2Controller',
-            controllerAs: 'comp2Ctrl'
+            templateUrl: '../app/components/subscribe/subscribe.html',
+            controller: 'SubscribeController',
+            controllerAs: 'subsCtrl'
           }
         }
       });
