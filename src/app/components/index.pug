@@ -1,20 +1,19 @@
-.navbar
-	img.logo-navbar(src='assets/bitcoin.png')
-	input.search(type="search" placeholder='{{ "SEARCH" | translate }}')
-	.filters-box
-		p.search-title
-			| {{ 'FILTER.TITLE' | translate }}
-		hr
-		a.search-option
-			| {{ 'FILTER.OPTION1' | translate }}
-		a.search-option
-			| {{ 'FILTER.OPTION2' | translate }}
-		a.search-option
-			| {{ 'FILTER.OPTION3' | translate }}
-		a.search-option
-			| {{ 'FILTER.OPTION4' | translate }}
-	.register-btn
-		img(src='assets/user.png')
-		p.subscribe
-			| {{ 'SUBSCRIBE' | translate }}
-.container(ui-view='content')
+.wrapper
+  .navbar
+    img.ref-img.logo-navbar(src='assets/bitcoin.png' alt='BitWatch' ui-sref='index.state1')
+    input.search(type='search' placeholder='{{ "SEARCH" | translate }}')
+    .filters-box
+      p.search-title
+        | {{ 'FILTER.TITLE' | translate }}
+      hr.filters
+      div(ng-repeat='filter in filters')
+        .filter-color
+          p.search-option
+            | {{ filter }}
+          input(type='color')
+    .register-btn
+      img.ref-img(src='assets/user.png' alt='user image' ui-sref='index.subscribe')
+      a.subscribe(ui-sref='index.subscribe')
+        | {{ 'SUBSCRIBE' | translate }}
+  .container
+    .container-view(ui-view='content')

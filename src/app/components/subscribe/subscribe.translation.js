@@ -4,7 +4,9 @@ angular.module('app-bootstrap').config([
 
     $translateProvider.translations('es', {
       SUBSCRIBE: {
-        TITLE: 'SUBSCRIBIRSE'
+        TITLE: 'SUBSCRIPCIÓN',
+        ACCEPT: 'SUBSCRIBIRSE',
+        CANCEL: 'CANCEL'
       }
     });
   }

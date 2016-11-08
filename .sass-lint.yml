@@ -46,7 +46,6 @@ rules:
   no-mergeable-selectors: 2
   no-misspelled-properties: 2
   no-trailing-zero: 2
-  no-vendor-prefixes: 2
   no-warn: 2
   one-declaration-per-line: 2
   quotes: 2

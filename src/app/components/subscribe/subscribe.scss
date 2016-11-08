@@ -1,0 +1,54 @@
+.input-group {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.input-table {
+  margin-top: 30px;
+  width: 30%;
+}
+
+.subscribe-input {
+  height: 30px;
+  width: calc(50% + 10px);
+}
+
+.row {
+  margin-top: 40px;
+  padding: 0 10px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+div {
+
+  &.panel-heading {
+    font-size: 15px;
+    margin-top: -18px;
+
+    &span {
+      margin-left: 5px;
+    }
+  }
+}
+
+label {
+
+  &.label-name {
+    font-weight: bold;
+  }
+}
+
+.panel-body {
+  display: none;
+}
+
+.panel {
+
+  &.panel-success {
+    margin-top: 30px;
+    width: 50%;
+  }
+}

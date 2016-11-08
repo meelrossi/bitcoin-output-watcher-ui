@@ -1,2 +1,44 @@
 h1
   | {{ 'SUBSCRIBE.TITLE' | translate }}
+hr.title
+form(name='subscribeForm' ng-submit='subscribeCtrl.subscribe()')
+  .input-group
+    label.label-name
+      | MAIL
+    br
+    input(type='email')
+  .input-group
+    label.label-name
+      | CONFIRMAR MAIL
+    br
+    input(type='email')
+  .input-group
+    label.label-name
+      | OUTPUTS
+    br
+    br
+    input.radio-form(type="radio" ng-model='subscribeCtrl.outputType' value='address' name="outputType" checked)
+    label
+      | DIRECCIÓN
+    input.radio-form(type="radio" ng-model='subscribeCtrl.outputType' value='transaction_id' name="outputType")
+    label
+      | ID TRANSACCIÓN
+    input.radio-form(type="radio" ng-model='subscribeCtrl.outputType' value='output' name="outputType")
+    label
+      | OUTPUT
+    br
+    br
+    input(type='text' ng-model='subscribeCtrl.currentOutput' ng-change='subscribeCtrl.getOutputs()')
+    button.btn(ng-click='subscribeCtrl.addOutput()')
+      | +
+    table.input-table
+      tr(ng-repeat='output in subscribeCtrl.outputs')
+        td
+          | {{ output }}
+        td
+          button.btn
+            | +
+  button.btn.accept-btn(ng-disabled='subscribeForm.$invalid' type='submit')
+    | {{ 'SUBSCRIBE.ACCEPT' | translate }}
+  button.btn.cancel-btn(ng-disabled='subscribeForm.$invalid' type='submit')
+    | {{ 'SUBSCRIBE.CANCEL' | translate }}

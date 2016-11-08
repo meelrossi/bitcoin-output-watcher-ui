@@ -33,7 +33,7 @@ angular.module('app-bootstrap').config([
           content: {
             templateUrl: '../app/components/subscribe/subscribe.html',
             controller: 'SubscribeController',
-            controllerAs: 'subsCtrl'
+            controllerAs: 'subscribeCtrl'
           }
         }
       });
