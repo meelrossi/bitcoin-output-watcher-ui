@@ -1,0 +1,23 @@
+h1
+  | TRANSACCIONES
+hr.title
+.play-pause
+  img.pp-button(src='assets/pause-play.png' alt='user image' ng-click='transactionsCtrl.togglePlay()')
+  h4
+    | {{ transactionsCtrl.play ? 'PAUSA' : 'PLAY' }}
+.input-table(ng-show='transactionsCtrl.liveTrans.length')
+  .row.header
+    .cell
+      | ID de Transacción
+    .cell
+      | Bitcoin
+    .cell
+      | Cant. Outputs
+  .row(ng-repeat='transaction in transactionsCtrl.liveTrans')
+    .cell
+      a(ui-sref='index.show({txid: "{{transaction.txid}}"})' filter-color colors='$root.filters' transaction='transaction')
+        | {{ transaction.txid }}
+    .cell
+      | {{ transaction.valueOut }}
+    .cell
+      | {{ transaction.outputs.length }}

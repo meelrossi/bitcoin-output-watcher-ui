@@ -1,29 +1,45 @@
 angular.module('app-bootstrap').controller('SubscribeController', [
-  '$http',
-  function ($http) {
+  'transactionService', '$state',
+  function (transactionService, $state) {
 
     this.outputType = 'address';
     this.outputs = [];
-
-    this.addOuput = () => {
-      console.log('dakshakjhdlajhd');
-      this.outputs.push(this.currentOutput);
-      this.currentOutput = '';
-    };
-
     this.subscribe = () => {
     };
 
+    this.resetCurrentOutput = () => {
+      this.currentOutput = '';
+      this.outputs = [];
+    };
+
+    this.cancel = () => {
+      $state.go('index.transactions');
+    };
+
     this.getOutputs = () => {
-      $http({
-        method: 'GET',
-        url: `//test-insight.bitpay.com/api/addr/${this.currentOutput}/utxo`
-      }).then(function successCallback(response) {
-          console.log(response);
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-    }
+      if (!this.currentOutput) {
+        return;
+      }
+      this.progressActivated = true;
+      if (this.outputType === 'address') {
+        transactionService.getUTXOSFromAddress(this.currentOutput)
+          .then((utxos) => {
+            this.progressActivated = false;
+            this.outputs = utxos.outputs;
+          })
+          .catch(() => {
+            this.progressActivated = false;
+          });
+      } else if (this.outputType === 'transactionID') {
+        transactionService.getTransactionFromId(this.currentOutput)
+          .then((transaction) => {
+            this.progressActivated = false;
+            this.outputs = transaction.outputs;
+          })
+          .catch(() => {
+            this.progressActivated = false;
+          });
+      }
+    };
   }
 ]);

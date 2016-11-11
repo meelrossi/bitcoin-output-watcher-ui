@@ -2,6 +2,10 @@ angular.module(
   'app-bootstrap', [
     'ui.router',
     'LocalStorageModule',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'ngAnimate',
+    'ngAria',
+    'ngMaterial',
+    'btford.socket-io'
   ]
 );

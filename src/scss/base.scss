@@ -1,5 +1,6 @@
 * {
   font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
   margin: 0;
 
   &:focus {
@@ -7,11 +8,12 @@
   }
 }
 
+input[type='text'],
 input,
 select {
   border: 1px solid $light-grey;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 14px;
   padding: 5px;
   width: 50%;
 
@@ -20,10 +22,15 @@ select {
     background-position: 6px 7px;
     background-repeat: no-repeat;
     border: 0;
+    box-sizing: inherit;
     height: 35px;
     margin: 20px 0;
     padding: 12px 12px 12px 35px;
     width: 260px;
+  }
+
+  &[type='checkbox'] {
+    width: inherit;
   }
 
   &[type='color'] {
@@ -68,7 +75,7 @@ select {
 }
 
 .navbar {
-  background: radial-gradient($light-red, $dark-red);
+  background: radial-gradient($medium-red, $dark-red);
   float: left;
   height: 100%;
   margin: 0;
@@ -133,7 +140,7 @@ hr {
   padding: 5px;
 
   &.accept-btn {
-    background-color: $green;
+    background-color: $light-blue;
   }
 
   &.cancel-btn {
@@ -153,7 +160,55 @@ hr {
 }
 
 .radio-form {
-  margin-right: 5px;
   display: inline-block;
+  margin-right: 5px;
   width: initial;
+}
+
+.row {
+  background: $grey;
+  display: table-row;
+
+  &:nth-child(odd) {
+    background: none;
+  }
+
+  &.header {
+    background: $medium-red;
+  }
+}
+
+.table {
+  display: table;
+  margin: 0 0 40px;
+  width: 100%;
+}
+
+.cell {
+  display: table-cell;
+  padding: 6px 12px;
+}
+
+.checkbox-label {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+input {
+
+  &.ng-touched {
+    &.ng-invalid {
+      border: 1px solid $dark-red;
+    }
+  }
+}
+
+.play-pause {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.pp-button {
+  margin-right: 10px;
 }

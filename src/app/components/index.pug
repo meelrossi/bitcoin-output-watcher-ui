@@ -1,6 +1,6 @@
 .wrapper
   .navbar
-    img.ref-img.logo-navbar(src='assets/bitcoin.png' alt='BitWatch' ui-sref='index.state1')
+    img.ref-img.logo-navbar(src='assets/bitcoin.png' alt='BitWatch' ui-sref='index.transactions')
     input.search(type='search' placeholder='{{ "SEARCH" | translate }}')
     .filters-box
       p.search-title
@@ -9,8 +9,8 @@
       div(ng-repeat='filter in filters')
         .filter-color
           p.search-option
-            | {{ filter }}
-          input(type='color')
+            | {{ filter.name }}
+          input(type='color' ng-model='filter.color')
     .register-btn
       img.ref-img(src='assets/user.png' alt='user image' ui-sref='index.subscribe')
       a.subscribe(ui-sref='index.subscribe')

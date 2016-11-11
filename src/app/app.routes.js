@@ -4,7 +4,7 @@ angular.module('app-bootstrap').config([
 
     // For any unmatched urls
     $urlRouterProvider.otherwise(($injector) => {
-      $injector.get('$state').go('index.state1');
+      $injector.get('$state').go('index.transactions');
     });
 
     // Now set up the states
@@ -17,13 +17,23 @@ angular.module('app-bootstrap').config([
           }
         }
       })
-      .state('index.state1', {
+      .state('index.transactions', {
         url: '/transactions',
         views: {
           content: {
-            templateUrl: '../app/components/component1/component1.html',
-            controller: 'Component1Controller',
-            controllerAs: 'comp1Ctrl'
+            templateUrl: '../app/components/transactions/transactions.html',
+            controller: 'TransactionsController',
+            controllerAs: 'transactionsCtrl'
+          }
+        }
+      })
+      .state('index.show', {
+        url: '/transactions/{txid:string}',
+        views: {
+          content: {
+            templateUrl: '../app/components/showTransaction/showTransaction.html',
+            controller: 'ShowTransactionController',
+            controllerAs: 'showCtrl'
           }
         }
       })

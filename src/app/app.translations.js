@@ -13,13 +13,9 @@ angular.module('app-bootstrap').config([
         SATURDAY: 'Sabado'
       },
       TITLE: 'BitWatch',
-      SEARCH: 'Buscar',
+      SEARCH: 'BUSCAR TRANSACCIÓN',
       FILTER: {
-        TITLE: 'FILTROS',
-        OPTION1: 'Opcion 1',
-        OPTION2: 'Opcion 2',
-        OPTION3: 'Opcion 3',
-        OPTION4: 'Opcion 4'
+        TITLE: 'COLORES TRANSACCIONES'
       },
       SUBSCRIBE: 'SUBSCRIBIRSE'
     });

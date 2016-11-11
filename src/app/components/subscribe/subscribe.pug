@@ -6,38 +6,49 @@ form(name='subscribeForm' ng-submit='subscribeCtrl.subscribe()')
     label.label-name
       | MAIL
     br
-    input(type='email')
+    input(type='email' name='email' required ng-model='subscribeCtrl.mail')
   .input-group
     label.label-name
       | CONFIRMAR MAIL
     br
-    input(type='email')
+    input(type='email' name='emailConfiramtion' required ng-model='subscribeCtrl.mailConfirmation')
   .input-group
     label.label-name
       | OUTPUTS
     br
     br
-    input.radio-form(type="radio" ng-model='subscribeCtrl.outputType' value='address' name="outputType" checked)
-    label
+    input.radio-form(type='radio' ng-model='subscribeCtrl.outputType' ng-change='subscribeCtrl.resetCurrentOutput()' value='address' name='outputType' checked)
+    label.checkbox-label
       | DIRECCIÓN
-    input.radio-form(type="radio" ng-model='subscribeCtrl.outputType' value='transaction_id' name="outputType")
-    label
+    input.radio-form(type='radio' ng-model='subscribeCtrl.outputType' ng-change='subscribeCtrl.resetCurrentOutput()' value='transactionID' name='outputType')
+    label.checkbox-label
       | ID TRANSACCIÓN
-    input.radio-form(type="radio" ng-model='subscribeCtrl.outputType' value='output' name="outputType")
-    label
-      | OUTPUT
     br
     br
-    input(type='text' ng-model='subscribeCtrl.currentOutput' ng-change='subscribeCtrl.getOutputs()')
-    button.btn(ng-click='subscribeCtrl.addOutput()')
-      | +
-    table.input-table
-      tr(ng-repeat='output in subscribeCtrl.outputs')
-        td
-          | {{ output }}
-        td
-          button.btn
-            | +
+    div
+      input(style='float:left; margin-right:10px' type='text' ng-model='subscribeCtrl.currentOutput' ng-change='subscribeCtrl.getOutputs()')
+      md-progress-circular.md-hue-3(style='float:left' md-diameter='30px' ng-show='subscribeCtrl.progressActivated' md-mode='indeterminate')
+    br
+    br
+    .input-table(ng-show='subscribeCtrl.outputs.length')
+      .row.header
+        .cell
+        .cell
+          | ID de Transacción
+        .cell
+          | Nro de Output
+        .cell
+          | Satoshis
+      .row(ng-repeat='output in subscribeCtrl.outputs')
+        .cell
+          input(type='checkbox')
+        .cell
+          | {{ output.txid }}
+        .cell
+          | {{ output.number }}
+        .cell
+          | {{ output.amount }}
+  br
   button.btn.accept-btn(ng-disabled='subscribeForm.$invalid' type='submit')
     | {{ 'SUBSCRIBE.ACCEPT' | translate }}
   button.btn.cancel-btn(ng-disabled='subscribeForm.$invalid' type='submit')
