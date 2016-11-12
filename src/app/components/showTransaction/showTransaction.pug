@@ -9,3 +9,19 @@ h4
   | CONFIRMACIONES: {{ showCtrl.transaction.confirmations }}
 h4
   | FEE: {{ showCtrl.transaction.fees }}
+.input-table(ng-show='showCtrl.transaction.length')
+  .row.header
+    .cell
+      | ID de Transacción
+    .cell
+      | Bitcoin
+    .cell
+      | Cant. Outputs
+  .row(ng-repeat='transaction in transactionsCtrl.liveTrans')
+    .cell
+      a(ui-sref='index.show({txid: "{{transaction.txid}}"})' filter-color colors='$root.filters' transaction='transaction')
+        | {{ transaction.txid }}
+    .cell
+      | {{ transaction.valueOut }}
+    .cell
+      | {{ transaction.outputs.length }}
