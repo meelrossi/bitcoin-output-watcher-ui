@@ -41,7 +41,7 @@ form(name='subscribeForm' ng-submit='subscribeCtrl.subscribe()')
           | Satoshis
       .row(ng-repeat='output in subscribeCtrl.outputs')
         .cell
-          input(type='checkbox')
+          input(type='checkbox' ng-model='output.selected')
         .cell
           | {{ output.txid }}
         .cell

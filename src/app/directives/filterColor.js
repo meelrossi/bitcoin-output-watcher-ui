@@ -11,7 +11,7 @@ angular.module('app-bootstrap').directive('filterColor', [
           if (color.filter(scope.transaction)) {
             scope.elem.parent().parent().css('background-color', color.color);
           }
-        })
+        });
       }
     };
   }

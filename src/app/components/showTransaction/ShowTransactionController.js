@@ -4,8 +4,8 @@ angular.module('app-bootstrap').controller('ShowTransactionController', [
 
     this.transactionId = $stateParams.txid;
     transactionService.getTransactionFromId(this.transactionId)
-      .then((tx)=> {
+      .then((tx) => {
         this.transaction = tx;
-      })
+      });
   }
 ]);

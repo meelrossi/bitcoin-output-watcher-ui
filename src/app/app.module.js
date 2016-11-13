@@ -6,6 +6,7 @@ angular.module(
     'ngAnimate',
     'ngAria',
     'ngMaterial',
-    'btford.socket-io'
+    'btford.socket-io',
+    'angular-growl'
   ]
 );

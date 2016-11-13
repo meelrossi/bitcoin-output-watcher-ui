@@ -1,10 +1,29 @@
 angular.module('app-bootstrap').controller('SubscribeController', [
-  'transactionService', '$state',
-  function (transactionService, $state) {
+  'transactionService', '$state', 'watcherService', 'angular-growl',
+  function (transactionService, $state, watcherService, growl) {
 
     this.outputType = 'address';
     this.outputs = [];
     this.subscribe = () => {
+      if (this.mail !== this.mailConfirmation) {
+        growl.addErrorMessage('Los mails no coinciden');
+        return;
+      }
+      _.forEach(_.filter(this.outputs, (output) => output.selected), (output) => {
+        const data = {
+          txid: output.txid,
+          output: output.number,
+          mail: this.mail
+        };
+        watcherService.watch(data)
+          .then(() => {
+            growl.addSuccessMessage('Esta subscripto a el output ' + output.number + 'de ' + output.txid);
+          })
+          .catch(() => {
+            growl.addErrorMessage('No se ha podido subscribir a el output ' + output.number + 'de ' + output.txid);
+          });
+      });
+      $state.go('index.transactions');
     };
 
     this.resetCurrentOutput = () => {
@@ -34,7 +53,7 @@ angular.module('app-bootstrap').controller('SubscribeController', [
         transactionService.getTransactionFromId(this.currentOutput)
           .then((transaction) => {
             this.progressActivated = false;
-            this.outputs = transaction.outputs;
+            this.outputs = _.filter(transaction.outputs, (output) => !output.spentTxId);
           })
           .catch(() => {
             this.progressActivated = false;

@@ -9,19 +9,47 @@ h4
   | CONFIRMACIONES: {{ showCtrl.transaction.confirmations }}
 h4
   | FEE: {{ showCtrl.transaction.fees }}
-.input-table(ng-show='showCtrl.transaction.length')
+h4
+  | VALOR IN: {{ showCtrl.transaction.valueIn }}
+h4
+  | VALOR OUT: {{ showCtrl.transaction.valueOut }}
+br
+br
+label.label-name
+  | INPUTS
+.input-table(ng-show='showCtrl.transaction.vin.length')
   .row.header
     .cell
-      | ID de Transacción
+      | Numero
     .cell
-      | Bitcoin
+      | Value
     .cell
-      | Cant. Outputs
-  .row(ng-repeat='transaction in transactionsCtrl.liveTrans')
+      | Transaccion
+  .row(ng-repeat='output in showCtrl.transaction.vin')
     .cell
-      a(ui-sref='index.show({txid: "{{transaction.txid}}"})' filter-color colors='$root.filters' transaction='transaction')
-        | {{ transaction.txid }}
+      | {{ output.vout }}
     .cell
-      | {{ transaction.valueOut }}
+      | {{ output.value }}
     .cell
-      | {{ transaction.outputs.length }}
+      a(ui-sref='index.show({txid: "{{ showCtrl.transaction.txid }}"})' filter-color colors='$root.filters' transaction='transaction')
+        | {{ output.txid }}
+br
+br
+label.label-name
+  | OUTPUTS
+.input-table(ng-show='showCtrl.transaction.vout.length')
+  .row.header
+    .cell
+      | Numero
+    .cell
+      | Value
+    .cell
+      | Transaccion gasto
+  .row(ng-repeat='output in showCtrl.transaction.vout')
+    .cell
+      | {{ output.n }}
+    .cell
+      | {{ output.value }}
+    .cell
+      a(ui-sref='index.show({txid: "{{ showCtrl.transaction.txid }}"})' filter-color colors='$root.filters' transaction='transaction')
+        | {{ output.spentTxId ? output.spentTxId : '-'}}

@@ -3,7 +3,7 @@ angular.module('app-bootstrap').factory('socket', [
   function ($rootScope) {
     const socket = io.connect('https://insight.bitpay.com');
     return {
-      on: function (eventName, callback) {
+      on: (eventName, callback) => {
         socket.on(eventName, function () {
           const args = arguments;
           $rootScope.$apply(function () {
@@ -11,7 +11,7 @@ angular.module('app-bootstrap').factory('socket', [
           });
         });
       },
-      emit: function (eventName, data, callback) {
+      emit: (eventName, data, callback) => {
         socket.emit(eventName, data, function () {
           const args = arguments;
           $rootScope.$apply(function () {
