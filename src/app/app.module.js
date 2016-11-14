@@ -7,6 +7,6 @@ angular.module(
     'ngAria',
     'ngMaterial',
     'btford.socket-io',
-    'angular-growl'
+    'ui-notification'
   ]
 );

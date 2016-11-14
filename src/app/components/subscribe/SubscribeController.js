@@ -1,29 +1,29 @@
 angular.module('app-bootstrap').controller('SubscribeController', [
-  'transactionService', '$state', 'watcherService', 'angular-growl',
-  function (transactionService, $state, watcherService, growl) {
+  'transactionService', '$state', 'watcherService', 'Notification',
+  function (transactionService, $state, watcherService, Notification) {
 
     this.outputType = 'address';
     this.outputs = [];
     this.subscribe = () => {
       if (this.mail !== this.mailConfirmation) {
-        growl.addErrorMessage('Los mails no coinciden');
+        Notification.error({ message: 'Los mails ingresados no coinciden', delay: 10000 });
         return;
       }
       _.forEach(_.filter(this.outputs, (output) => output.selected), (output) => {
         const data = {
           txid: output.txid,
           output: output.number,
-          mail: this.mail
+          email: this.mail
         };
         watcherService.watch(data)
           .then(() => {
-            growl.addSuccessMessage('Esta subscripto a el output ' + output.number + 'de ' + output.txid);
+            Notification.success({ message: 'Esta subscripto a el output ' + output.number + ' de ' + output.txid, delay: 10000 });
+            this.output = {};
           })
           .catch(() => {
-            growl.addErrorMessage('No se ha podido subscribir a el output ' + output.number + 'de ' + output.txid);
+            Notification.error({ message: 'No se ha podido subscribir a el output ' + output.number + 'de ' + output.txid, delay: 10000 });
           });
       });
-      $state.go('index.transactions');
     };
 
     this.resetCurrentOutput = () => {
@@ -41,22 +41,36 @@ angular.module('app-bootstrap').controller('SubscribeController', [
       }
       this.progressActivated = true;
       if (this.outputType === 'address') {
+        if (this.currentOutput.length < 32) {
+          return;
+        }
         transactionService.getUTXOSFromAddress(this.currentOutput)
           .then((utxos) => {
             this.progressActivated = false;
             this.outputs = utxos.outputs;
+            if (this.outputs.length === 0) {
+              Notification.error({ message: 'La dirección no tiene ningun output por gastar', delay: 10000 });
+            }
           })
           .catch(() => {
             this.progressActivated = false;
+            Notification.error({ message: 'El dirección es inválida', delay: 10000 });
           });
       } else if (this.outputType === 'transactionID') {
+        if (this.currentOutput.length < 62) {
+          return;
+        }
         transactionService.getTransactionFromId(this.currentOutput)
           .then((transaction) => {
             this.progressActivated = false;
             this.outputs = _.filter(transaction.outputs, (output) => !output.spentTxId);
+            if (this.outputs.length === 0) {
+              Notification.error({ message: 'La transacción no tiene ningun output por gastar', delay: 10000 });
+            }
           })
           .catch(() => {
             this.progressActivated = false;
+            Notification.error({ message: 'El id de transacción es inválido', delay: 10000 });
           });
       }
     };

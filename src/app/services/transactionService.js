@@ -5,7 +5,7 @@ angular.module('app-bootstrap').service('transactionService', [
 
     return {
       getAddressInfo: (address) => {
-        return $http({ method: 'GET', url: `${ insightApi }/addr/${ address }` })
+        return $http({ method: 'GET', url: `${ insightApi }/addr/${ address }` , headers: { 'Access-Control-Allow-Origin': 'http://localhost:3000'}})
                 .then(Address.apiResponseTransformer.bind(Address));
       },
 

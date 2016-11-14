@@ -5,7 +5,7 @@ angular.module('app-bootstrap').service('watcherService', [
 
     return {
       watch: (data) => {
-        return $http({ method: 'POST', url: `${ watcherApi }/watch`, data: { ...data } });
+        return $http({ method: 'POST', url: `${ watcherApi }/watch`, params: data });
       }
     };
   }
