@@ -18,7 +18,8 @@ angular.module('app-bootstrap').controller('SubscribeController', [
         watcherService.watch(data)
           .then(() => {
             Notification.success({ message: 'Esta subscripto a el output ' + output.number + ' de ' + output.txid, delay: 10000 });
-            this.output = {};
+            this.outputs = [];
+            this.currentOutput = '';
           })
           .catch(() => {
             Notification.error({ message: 'No se ha podido subscribir a el output ' + output.number + 'de ' + output.txid, delay: 10000 });

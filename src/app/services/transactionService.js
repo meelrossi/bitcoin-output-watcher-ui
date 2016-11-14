@@ -5,17 +5,17 @@ angular.module('app-bootstrap').service('transactionService', [
 
     return {
       getAddressInfo: (address) => {
-        return $http({ method: 'GET', url: `${ insightApi }/addr/${ address }` , headers: { 'Access-Control-Allow-Origin': 'http://localhost:3000'}})
+        return $http({ method: 'GET', url: `${ insightApi }/addr/${ address }` , dataType: 'json' })
                 .then(Address.apiResponseTransformer.bind(Address));
       },
 
       getUTXOSFromAddress: (address) => {
-        return $http({ method: 'GET', url: `${ insightApi }/addr/${ address }/utxo` })
+        return $http({ method: 'GET', url: `${ insightApi }/addr/${ address }/utxo`, dataType: 'json' })
                 .then(Utxos.apiResponseTransformer.bind(Utxos));
       },
 
       getTransactionFromId: (id) => {
-        return $http({ method: 'GET', url: `${ insightApi }/tx/${ id }` })
+        return $http({ method: 'GET', url: `${ insightApi }/tx/${ id }`, dataType: 'json' })
                 .then(Transaction.apiResponseTransformer.bind(Transaction));
       }
     };
