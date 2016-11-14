@@ -15,11 +15,11 @@ angular.module('app-bootstrap').factory('Output', [
       }
 
       get amount () {
-        return this.satoshis || 100000000 * this.value;
+        return this.value / 100000000;
       }
 
       get number () {
-        return angular.isDefined(this.vout) ? this.vout : this.n;
+        return angular.isDefined(this.tx_output_n) ? this.tx_output_n : this.n;
       }
     }
 

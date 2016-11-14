@@ -3,8 +3,8 @@ angular.module('app-bootstrap').factory('Address', [
   function (AbstractModel) {
 
     class Address extends AbstractModel {
-      constructor (output) {
-        super(output);
+      constructor (data) {
+        super(data);
       }
     }
 

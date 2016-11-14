@@ -1,55 +1,38 @@
 h1
   | TRANSACCIÓN
 h4
-  | {{ showCtrl.transactionId }}
+  | {{ showCtrl.transaction.hash }}
 hr.title
 h4
-  | HASH BLOQUE: {{ showCtrl.transaction.blockhash }}
-h4
-  | CONFIRMACIONES: {{ showCtrl.transaction.confirmations }}
-h4
-  | FEE: {{ showCtrl.transaction.fees }}
-h4
-  | VALOR IN: {{ showCtrl.transaction.valueIn }}
-h4
-  | VALOR OUT: {{ showCtrl.transaction.valueOut }}
+  | ALTURA BLOQUE: {{ showCtrl.transaction.block_height }}
 br
 br
 label.label-name
   | INPUTS
-.input-table(ng-show='showCtrl.transaction.vin.length')
+.input-table(ng-show='showCtrl.transaction.inputs.length')
   .row.header
     .cell
-      | Numero
+      | Value (Satoshi)
     .cell
-      | Value
+      | Indice Transaccion
+  .row(ng-repeat='output in showCtrl.transaction.inputs')
     .cell
-      | Transaccion
-  .row(ng-repeat='output in showCtrl.transaction.vin')
+      | {{ output.prev_out.value }}
     .cell
-      | {{ output.vout }}
-    .cell
-      | {{ output.value }}
-    .cell
-      a(ui-sref='index.show({txid: "{{ showCtrl.transaction.txid }}"})' filter-color colors='$root.filters' transaction='transaction')
-        | {{ output.txid }}
+      a(ui-sref='index.show({txid: "{{ output.prev_out.tx_index }}"})')
+        | {{ output.prev_out.tx_index }}
 br
 br
 label.label-name
   | OUTPUTS
-.input-table(ng-show='showCtrl.transaction.vout.length')
+.input-table(ng-show='showCtrl.transaction.out.length')
   .row.header
     .cell
       | Numero
     .cell
-      | Value
-    .cell
-      | Transaccion gasto
-  .row(ng-repeat='output in showCtrl.transaction.vout')
+      | Value (Satoshi)
+  .row(ng-repeat='output in showCtrl.transaction.out')
     .cell
       | {{ output.n }}
     .cell
       | {{ output.value }}
-    .cell
-      a(ui-sref='index.show({txid: "{{ showCtrl.transaction.txid }}"})' filter-color colors='$root.filters' transaction='transaction')
-        | {{ output.spentTxId ? output.spentTxId : '-'}}

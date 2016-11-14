@@ -11,7 +11,7 @@ angular.module('app-bootstrap').controller('SubscribeController', [
       }
       _.forEach(_.filter(this.outputs, (output) => output.selected), (output) => {
         const data = {
-          txid: output.txid,
+          txid: output.tx_hash,
           output: output.number,
           email: this.mail
         };
@@ -22,7 +22,7 @@ angular.module('app-bootstrap').controller('SubscribeController', [
             this.currentOutput = '';
           })
           .catch(() => {
-            Notification.error({ message: 'No se ha podido subscribir a el output ' + output.number + 'de ' + output.txid, delay: 10000 });
+            Notification.error({ message: 'No se ha podido subscribir a el output ' + output.number + ' de ' + output.tx_hash, delay: 10000 });
           });
       });
     };
@@ -64,7 +64,7 @@ angular.module('app-bootstrap').controller('SubscribeController', [
         transactionService.getTransactionFromId(this.currentOutput)
           .then((transaction) => {
             this.progressActivated = false;
-            this.outputs = _.filter(transaction.outputs, (output) => !output.spentTxId);
+            this.outputs = _.filter(transaction.outputs, (output) => !output.spent);
             if (this.outputs.length === 0) {
               Notification.error({ message: 'La transacción no tiene ningun output por gastar', delay: 10000 });
             }

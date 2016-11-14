@@ -5,7 +5,7 @@ angular.module('app-bootstrap').factory('Utxos', [
     class Utxos extends AbstractModel {
       constructor (output) {
         super(output);
-        this.outputs = Output.apiResponseTransformer(this.data);
+        this.outputs = Output.apiResponseTransformer(this.data.unspent_outputs);
       }
     }
     return Utxos;

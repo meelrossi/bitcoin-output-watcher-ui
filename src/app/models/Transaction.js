@@ -5,9 +5,9 @@ angular.module('app-bootstrap').factory('Transaction', [
     class Transaction extends AbstractModel {
       constructor (transaction) {
         super(transaction.data);
-        this.outputs = Output.apiResponseTransformer(this.vout);
+        this.outputs = Output.apiResponseTransformer(this.out);
         _.forEach(this.outputs, (output) => {
-          output.txid = this.txid;
+          output.txid = this.hash;
         });
       }
 

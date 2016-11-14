@@ -38,12 +38,13 @@ form(name='subscribeForm' ng-submit='subscribeCtrl.subscribe()')
         .cell
           | Nro de Output
         .cell
-          | Satoshis
+          | Bitcoin
       .row(ng-repeat='output in subscribeCtrl.outputs')
         .cell
           input(type='checkbox' ng-model='output.selected')
         .cell
-          | {{ output.txid }}
+          a(ui-sref='index.show({txid: "{{ output.tx_hash ? output.tx_hash : output.txid }}"})')
+            | {{ output.tx_hash ? output.tx_hash : output.txid }}
         .cell
           | {{ output.number }}
         .cell
@@ -51,5 +52,5 @@ form(name='subscribeForm' ng-submit='subscribeCtrl.subscribe()')
   br
   button.btn.accept-btn(ng-disabled='subscribeForm.$invalid' type='submit')
     | {{ 'SUBSCRIBE.ACCEPT' | translate }}
-  button.btn.cancel-btn(ng-disabled='subscribeForm.$invalid' type='submit')
+  button.btn.cancel-btn(ng-click='subscribeCtrl.cancel()')
     | {{ 'SUBSCRIBE.CANCEL' | translate }}
