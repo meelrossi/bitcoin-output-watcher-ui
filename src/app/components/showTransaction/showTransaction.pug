@@ -37,4 +37,4 @@ label.label-name
     .cell
       | {{ output.value }}
     .cell
-      | {{ output.spent }}
+      | {{ output.spent ? 'SI' : 'NO' }}
