@@ -3,8 +3,6 @@ h1
 h4
   | {{ showCtrl.transaction.hash }}
 hr.title
-h4
-  | ALTURA BLOQUE: {{ showCtrl.transaction.block_height }}
 br
 br
 label.label-name
@@ -31,8 +29,12 @@ label.label-name
       | Numero
     .cell
       | Value (Satoshi)
+    .cell
+      | Gastado
   .row(ng-repeat='output in showCtrl.transaction.out')
     .cell
       | {{ output.n }}
     .cell
       | {{ output.value }}
+    .cell
+      | {{ output.spent }}

@@ -10,7 +10,6 @@ angular.module('app-bootstrap').controller('SubscribeController', [
         return;
       }
       _.forEach(_.filter(this.outputs, (output) => output.selected), (output) => {
-        debugger
         const data = {
           txid: output.transactionId,
           output: output.number,
