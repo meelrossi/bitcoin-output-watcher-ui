@@ -21,6 +21,10 @@ angular.module('app-bootstrap').factory('Output', [
       get number () {
         return angular.isDefined(this.tx_output_n) ? this.tx_output_n : this.n;
       }
+
+      get transactionId () {
+        return this.tx_hash ? this.tx_hash : this.txid;
+      }
     }
 
     return Output;
